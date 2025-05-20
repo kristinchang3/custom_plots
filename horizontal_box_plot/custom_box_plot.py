@@ -23,7 +23,8 @@ def custom_box_plot(
         fig_ylabels: Optional[Union[np.ndarray[str], List[np.ndarray[str]]]] = [['Scenario 1'], ['Scenario 2']],
         fig_title: Optional[str] = 'Custom Box Plot',
         xlabel: Optional[str] = 'Values',
-        fig_size: Optional[Tuple[int, int]] = (10, 7)
+        fig_size: Optional[Tuple[int, int]] = (10, 7),
+        invert_yaxis: bool = True
         ):
     """
     Creates a matplotlib figure containing horizontal box subplots.
@@ -120,7 +121,8 @@ def plot_scenario(
         marker_size: Optional[float] = 5,
         marker_outline_width: Optional[float] = 0,
         spacing_factor: Optional[float] = 0.5,
-        fig_ylabel: Optional[str] = ['Scenario']
+        fig_ylabel: Optional[str] = ['Scenario'],
+        invert_yaxis: bool = True
         ):
 
     # Define custom positions to reduce spacing between boxes
@@ -159,7 +161,9 @@ def plot_scenario(
     # Adjust y-axis labels to match box positions
     ax.set_yticks(positions)
     ax.set_yticklabels(labels)
+    if invert_yaxis:
+        ax.invert_yaxis()
 
     # Add labels to plot
-    ax.set_ylabel('             '+fig_ylabel+'           ', bbox=dict(edgecolor='black', facecolor='lightgray'), labelpad=20)
+    ax.set_ylabel('             '+fig_ylabel+'             ', bbox=dict(edgecolor='black', facecolor='lightgray'), labelpad=20)
     return ax
